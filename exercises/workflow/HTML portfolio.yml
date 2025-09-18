@@ -1,0 +1,748 @@
+app:
+  description: ''
+  icon: 🤖
+  icon_background: '#FFEAD5'
+  mode: workflow
+  name: HTML portfolio
+  use_icon_as_answer_icon: false
+dependencies: []
+kind: app
+version: 0.4.0
+workflow:
+  conversation_variables: []
+  environment_variables: []
+  features:
+    file_upload:
+      allowed_file_extensions:
+      - .JPG
+      - .JPEG
+      - .PNG
+      - .GIF
+      - .WEBP
+      - .SVG
+      allowed_file_types:
+      - image
+      allowed_file_upload_methods:
+      - local_file
+      - remote_url
+      enabled: false
+      fileUploadConfig:
+        audio_file_size_limit: 50
+        batch_count_limit: 5
+        file_size_limit: 15
+        image_file_size_limit: 10
+        video_file_size_limit: 100
+        workflow_file_upload_limit: 10
+      image:
+        enabled: false
+        number_limits: 3
+        transfer_methods:
+        - local_file
+        - remote_url
+      number_limits: 3
+    opening_statement: ''
+    retriever_resource:
+      enabled: true
+    sensitive_word_avoidance:
+      enabled: false
+    speech_to_text:
+      enabled: false
+    suggested_questions: []
+    suggested_questions_after_answer:
+      enabled: false
+    text_to_speech:
+      enabled: false
+      language: ''
+      voice: ''
+  graph:
+    edges:
+    - data:
+        isInLoop: false
+        sourceType: start
+        targetType: agent
+      id: 1756263714792-source-1757467486717-target
+      source: '1756263714792'
+      sourceHandle: source
+      target: '1757467486717'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: agent
+        targetType: end
+      id: 1757467486717-source-1756270581073-target
+      source: '1757467486717'
+      sourceHandle: source
+      target: '1756270581073'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    nodes:
+    - data:
+        desc: ''
+        selected: false
+        title: Bắt đầu
+        type: start
+        variables:
+        - label: full_name
+          max_length: 48
+          options: []
+          required: true
+          type: text-input
+          variable: full_name
+        - label: job_title
+          max_length: 96
+          options: []
+          required: true
+          type: text-input
+          variable: job_title
+        - label: about_me
+          max_length: 4096
+          options: []
+          required: true
+          type: paragraph
+          variable: about_me
+        - label: skills
+          max_length: 256
+          options: []
+          required: true
+          type: text-input
+          variable: skills
+        - label: email
+          max_length: 48
+          options: []
+          required: false
+          type: text-input
+          variable: email
+        - label: phone
+          max_length: 10
+          options: []
+          required: false
+          type: text-input
+          variable: phone
+        - label: location
+          max_length: 48
+          options: []
+          required: true
+          type: text-input
+          variable: location
+        - label: birth
+          max_length: 4
+          options: []
+          required: false
+          type: text-input
+          variable: birth
+        - label: experience_year
+          max_length: 4
+          options: []
+          required: true
+          type: text-input
+          variable: experience_years
+        - label: education
+          max_length: 256
+          options: []
+          required: true
+          type: paragraph
+          variable: education
+        - label: social_links
+          max_length: 256
+          options: []
+          required: true
+          type: paragraph
+          variable: social_links
+      height: 350
+      id: '1756263714792'
+      position:
+        x: 30
+        y: 375
+      positionAbsolute:
+        x: 30
+        y: 375
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        desc: ''
+        outputs:
+        - value_selector:
+          - '1757467486717'
+          - text
+          value_type: string
+          variable: output
+        selected: false
+        title: End
+        type: end
+      height: 90
+      id: '1756270581073'
+      position:
+        x: 651.7337099214841
+        y: 375
+      positionAbsolute:
+        x: 651.7337099214841
+        y: 375
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        agent_parameters:
+          instruction:
+            type: constant
+            value: "# ROLE\nYou are a UI developer with deep HTML and CSS knowledge.\n\
+              \n# INSTRUCTION\nYou help users creating webpages to showcase their\
+              \ experiences, projects, and aspirations. The webpage you create is\
+              \ both impressive, and captivating.\n\nFrom the users inputs, create\
+              \ a `output.html` file adhere strictly to design requirements. \n\n\
+              # CONTEXT\n## Design requirements\nBạn sẽ nhận được dữ liệu người dùng,\
+              \ hãy dùng thông tin này để tạo 1 trang web portfolio cá nhân.\n\nMột\
+              \ trang web portfolio cá nhân hoàn chỉnh cần phải có các phần sau đây:\n\
+              1. Header/Hero Section: Tên, chức danh, ảnh đại diện (placeholder nếu\
+              \ không có)\n2. About Section: Giới thiệu chi tiết về bản thân\n3. Skills\
+              \ Section: Hiển thị kỹ năng dưới dạng thanh tiến độ hoặc tags\n4. Experience\
+              \ Section: Kinh nghiệm làm việc theo timeline\n5. Projects Section:\
+              \ Dự án nổi bật với mô tả\n6. Education Section: Học vấn và chứng chỉ\n\
+              7. Contact Section: Thông tin liên hệ và form (nếu yêu cầu)\n\nBên cạnh\
+              \ đó, cần chú ý đến một số yếu tố sau:\n- Cấu trúc HTML theo tiêu chuẩn\
+              \ W3C.\n- Thiết kế responsive cho từng breakpoint và áp dụng CSS hiện\
+              \ đại như Flexbox/Grid.\n- Tùy biến phong cách thiết kế (modern, classic,\
+              \ minimal, creative) và màu sắc theo yêu cầu.\n- Ap dụng các tính năng\
+              \ bổ sung như smooth scrolling, parallax effects, loading animation,\
+              \ typing effect cho hero text, progress bars cho skills, lightbox cho\
+              \ projects, dark/light mode toggle (nếu phù hợp)).\n- Tối ưu SEO và\
+              \ Performance qua việc thêm meta tags, optimized images, minified CSS,\
+              \ form liên hệ (nếu cần), cùng nhiều yếu tố khác.\n- Tránh XSS bằng\
+              \ cách sanitize input và xử lý content cơ bản như format, parse, extract\
+              \ từ dữ liệu thiếu/trống\n\n# OUTPUT\nhãy wrap đoạn mã HTML vừa tạo\
+              \ bằng tag <final_answer>đoạn mã html</final_answer>\n\n## Ví dụ:\n\
+              <final_answer><!DOCTYPE html>\n<html>\n<head>\n<title>Page Title</title>\n\
+              </head>\n<body>\n\n<h1>This is a Heading</h1>\n<p>This is a paragraph.</p>\n\
+              \n</body>\n</html>\n</final_answer>"
+          maximum_iterations:
+            type: constant
+            value: 3
+          model:
+            type: constant
+            value:
+              completion_params: {}
+              mode: chat
+              model: gpt-4o-mini
+              model_type: llm
+              provider: langgenius/openai/openai
+              type: model-selector
+          query:
+            type: constant
+            value: 'From the following user inputs, create the file
+
+              {{#1756263714792.full_name#}}
+
+              {{#1756263714792.job_title#}}
+
+              {{#1756263714792.about_me#}}
+
+              {{#1756263714792.skills#}}
+
+              {{#1756263714792.email#}}
+
+              {{#1756263714792.location#}}
+
+              {{#1756263714792.experience_years#}}
+
+              {{#1756263714792.education#}}
+
+              {{#1756263714792.social_links#}}'
+          tools:
+            type: constant
+            value:
+            - enabled: true
+              extra:
+                description: A tool for calculating the weekday of a given date.
+              parameters:
+                day:
+                  auto: 1
+                  value: null
+                month:
+                  auto: 1
+                  value: null
+                year:
+                  auto: 1
+                  value: null
+              provider_name: time
+              provider_show_name: time
+              schemas:
+              - auto_generate: null
+                default: null
+                form: llm
+                human_description:
+                  en_US: Year
+                  ja_JP: Year
+                  pt_BR: Year
+                  zh_Hans: 年
+                label:
+                  en_US: Year
+                  ja_JP: Year
+                  pt_BR: Year
+                  zh_Hans: 年
+                llm_description: null
+                max: null
+                min: null
+                name: year
+                options: []
+                placeholder: null
+                precision: null
+                required: true
+                scope: null
+                template: null
+                type: number
+              - auto_generate: null
+                default: null
+                form: llm
+                human_description:
+                  en_US: Month
+                  ja_JP: Month
+                  pt_BR: Month
+                  zh_Hans: 月
+                label:
+                  en_US: Month
+                  ja_JP: Month
+                  pt_BR: Month
+                  zh_Hans: 月
+                llm_description: null
+                max: null
+                min: null
+                name: month
+                options: []
+                placeholder: null
+                precision: null
+                required: true
+                scope: null
+                template: null
+                type: number
+              - auto_generate: null
+                default: null
+                form: llm
+                human_description:
+                  en_US: day
+                  ja_JP: day
+                  pt_BR: day
+                  zh_Hans: 日
+                label:
+                  en_US: day
+                  ja_JP: day
+                  pt_BR: day
+                  zh_Hans: 日
+                llm_description: null
+                max: null
+                min: null
+                name: day
+                options: []
+                placeholder: null
+                precision: null
+                required: true
+                scope: null
+                template: null
+                type: number
+              settings: {}
+              tool_description: A tool for calculating the weekday of a given date.
+              tool_label: Weekday Calculator
+              tool_name: weekday
+              type: builtin
+            - enabled: false
+              extra:
+                description: GPT Image Generate (gpt-image-1) is a text to image generation
+                  tool
+              parameters:
+                prompt:
+                  auto: 1
+                  value: null
+              provider_name: langgenius/openai_tool/openai
+              provider_show_name: langgenius/openai_tool/openai
+              schemas:
+              - auto_generate: null
+                default: null
+                form: llm
+                human_description:
+                  en_US: Detailed description of the image you want to generate (max
+                    32000 chars). Check the official OpenAI documentation for GPT
+                    Image.
+                  ja_JP: Detailed description of the image you want to generate (max
+                    32000 chars). Check the official OpenAI documentation for GPT
+                    Image.
+                  pt_BR: Detailed description of the image you want to generate (max
+                    32000 chars). Check the official OpenAI documentation for GPT
+                    Image.
+                  zh_Hans: 您想要生成的图像的详细描述（最多 32000 字符）。请查看 GPT Image 的 OpenAI 官方文档。
+                label:
+                  en_US: Prompt
+                  ja_JP: Prompt
+                  pt_BR: Prompt
+                  zh_Hans: 提示词
+                llm_description: Detailed image prompt for GPT Image (max 32000 characters).
+                  Describe the desired image clearly.
+                max: null
+                min: null
+                name: prompt
+                options: []
+                placeholder: null
+                precision: null
+                required: true
+                scope: null
+                template: null
+                type: string
+              - auto_generate: null
+                default: auto
+                form: form
+                human_description:
+                  en_US: Select the image size
+                  ja_JP: Select the image size
+                  pt_BR: Select the image size
+                  zh_Hans: 选择图像大小
+                label:
+                  en_US: Image size
+                  ja_JP: Image size
+                  pt_BR: Image size
+                  zh_Hans: 图像大小
+                llm_description: ''
+                max: null
+                min: null
+                name: size
+                options:
+                - icon: ''
+                  label:
+                    en_US: Auto
+                    ja_JP: Auto
+                    pt_BR: Auto
+                    zh_Hans: 自动
+                  value: auto
+                - icon: ''
+                  label:
+                    en_US: Square (1024x1024)
+                    ja_JP: Square (1024x1024)
+                    pt_BR: Square (1024x1024)
+                    zh_Hans: 方形 (1024x1024)
+                  value: 1024x1024
+                - icon: ''
+                  label:
+                    en_US: Portrait (1024x1536)
+                    ja_JP: Portrait (1024x1536)
+                    pt_BR: Portrait (1024x1536)
+                    zh_Hans: 竖屏/肖像 (1024x1536)
+                  value: 1024x1536
+                - icon: ''
+                  label:
+                    en_US: Landscape (1536x1024)
+                    ja_JP: Landscape (1536x1024)
+                    pt_BR: Landscape (1536x1024)
+                    zh_Hans: 横屏/风景 (1536x1024)
+                  value: 1536x1024
+                placeholder: null
+                precision: null
+                required: false
+                scope: null
+                template: null
+                type: select
+              - auto_generate: null
+                default: 1
+                form: form
+                human_description:
+                  en_US: Number of images to generate (Must be less than 10).
+                  ja_JP: Number of images to generate (Must be less than 10).
+                  pt_BR: Number of images to generate (Must be less than 10).
+                  zh_Hans: 要生成的图像数量（必须小于 10）。
+                label:
+                  en_US: Number of images
+                  ja_JP: Number of images
+                  pt_BR: Number of images
+                  zh_Hans: 图像数量
+                llm_description: ''
+                max: 10
+                min: 1
+                name: n
+                options: []
+                placeholder: null
+                precision: null
+                required: false
+                scope: null
+                template: null
+                type: number
+              - auto_generate: null
+                default: auto
+                form: form
+                human_description:
+                  en_US: Select the image quality
+                  ja_JP: Select the image quality
+                  pt_BR: Select the image quality
+                  zh_Hans: 选择图像质量
+                label:
+                  en_US: Image quality
+                  ja_JP: Image quality
+                  pt_BR: Image quality
+                  zh_Hans: 图像质量
+                llm_description: ''
+                max: null
+                min: null
+                name: quality
+                options:
+                - icon: ''
+                  label:
+                    en_US: Auto
+                    ja_JP: Auto
+                    pt_BR: Auto
+                    zh_Hans: 自动
+                  value: auto
+                - icon: ''
+                  label:
+                    en_US: Low
+                    ja_JP: Low
+                    pt_BR: Low
+                    zh_Hans: 低
+                  value: low
+                - icon: ''
+                  label:
+                    en_US: Medium
+                    ja_JP: Medium
+                    pt_BR: Medium
+                    zh_Hans: 中
+                  value: medium
+                - icon: ''
+                  label:
+                    en_US: High
+                    ja_JP: High
+                    pt_BR: High
+                    zh_Hans: 高
+                  value: high
+                placeholder: null
+                precision: null
+                required: false
+                scope: null
+                template: null
+                type: select
+              - auto_generate: null
+                default: auto
+                form: form
+                human_description:
+                  en_US: Select the image background type. Transparent requires PNG
+                    or WebP format and works best with medium/high quality.
+                  ja_JP: Select the image background type. Transparent requires PNG
+                    or WebP format and works best with medium/high quality.
+                  pt_BR: Select the image background type. Transparent requires PNG
+                    or WebP format and works best with medium/high quality.
+                  zh_Hans: 选择图像背景类型。透明背景需要 PNG 或 WebP 格式，并且最适用于中/高质量。
+                label:
+                  en_US: Background
+                  ja_JP: Background
+                  pt_BR: Background
+                  zh_Hans: 背景
+                llm_description: ''
+                max: null
+                min: null
+                name: background
+                options:
+                - icon: ''
+                  label:
+                    en_US: Auto
+                    ja_JP: Auto
+                    pt_BR: Auto
+                    zh_Hans: 自动
+                  value: auto
+                - icon: ''
+                  label:
+                    en_US: Opaque
+                    ja_JP: Opaque
+                    pt_BR: Opaque
+                    zh_Hans: 不透明
+                  value: opaque
+                - icon: ''
+                  label:
+                    en_US: Transparent
+                    ja_JP: Transparent
+                    pt_BR: Transparent
+                    zh_Hans: 透明
+                  value: transparent
+                placeholder: null
+                precision: null
+                required: false
+                scope: null
+                template: null
+                type: select
+              - auto_generate: null
+                default: auto
+                form: form
+                human_description:
+                  en_US: Select the output image format.
+                  ja_JP: Select the output image format.
+                  pt_BR: Select the output image format.
+                  zh_Hans: 选择输出图像格式。
+                label:
+                  en_US: Output Format
+                  ja_JP: Output Format
+                  pt_BR: Output Format
+                  zh_Hans: 输出格式
+                llm_description: ''
+                max: null
+                min: null
+                name: output_format
+                options:
+                - icon: ''
+                  label:
+                    en_US: Auto
+                    ja_JP: Auto
+                    pt_BR: Auto
+                    zh_Hans: 自动
+                  value: auto
+                - icon: ''
+                  label:
+                    en_US: PNG
+                    ja_JP: PNG
+                    pt_BR: PNG
+                    zh_Hans: PNG
+                  value: png
+                - icon: ''
+                  label:
+                    en_US: JPEG
+                    ja_JP: JPEG
+                    pt_BR: JPEG
+                    zh_Hans: JPEG
+                  value: jpeg
+                - icon: ''
+                  label:
+                    en_US: WebP
+                    ja_JP: WebP
+                    pt_BR: WebP
+                    zh_Hans: WebP
+                  value: webp
+                placeholder: null
+                precision: null
+                required: false
+                scope: null
+                template: null
+                type: select
+              - auto_generate: null
+                default: 100
+                form: form
+                human_description:
+                  en_US: Set compression level (0-100) for JPEG/WebP formats.
+                  ja_JP: Set compression level (0-100) for JPEG/WebP formats.
+                  pt_BR: Set compression level (0-100) for JPEG/WebP formats.
+                  zh_Hans: 设置 JPEG/WebP 格式的压缩级别（0-100）。
+                label:
+                  en_US: Output Compression
+                  ja_JP: Output Compression
+                  pt_BR: Output Compression
+                  zh_Hans: 输出压缩
+                llm_description: ''
+                max: 100
+                min: 0
+                name: output_compression
+                options: []
+                placeholder: null
+                precision: null
+                required: false
+                scope: null
+                template: null
+                type: number
+              - auto_generate: null
+                default: auto
+                form: form
+                human_description:
+                  en_US: Control content moderation level.
+                  ja_JP: Control content moderation level.
+                  pt_BR: Control content moderation level.
+                  zh_Hans: 控制内容审核级别。
+                label:
+                  en_US: Moderation
+                  ja_JP: Moderation
+                  pt_BR: Moderation
+                  zh_Hans: 内容审核
+                llm_description: ''
+                max: null
+                min: null
+                name: moderation
+                options:
+                - icon: ''
+                  label:
+                    en_US: Auto
+                    ja_JP: Auto
+                    pt_BR: Auto
+                    zh_Hans: 自动
+                  value: auto
+                - icon: ''
+                  label:
+                    en_US: Low
+                    ja_JP: Low
+                    pt_BR: Low
+                    zh_Hans: 低
+                  value: low
+                placeholder: null
+                precision: null
+                required: false
+                scope: null
+                template: null
+                type: select
+              settings:
+                background:
+                  value:
+                    type: constant
+                    value: auto
+                moderation:
+                  value:
+                    type: constant
+                    value: auto
+                n:
+                  value:
+                    type: constant
+                    value: 1
+                output_compression:
+                  value:
+                    type: constant
+                    value: 100
+                output_format:
+                  value:
+                    type: constant
+                    value: auto
+                quality:
+                  value:
+                    type: constant
+                    value: auto
+                size:
+                  value:
+                    type: constant
+                    value: auto
+              tool_description: GPT Image Generate (gpt-image-1) is a text to image
+                generation tool
+              tool_label: GPT Image Generate
+              tool_name: gpt_image_generate
+              type: builtin
+        agent_strategy_label: ReAct
+        agent_strategy_name: ReAct
+        agent_strategy_provider_name: langgenius/agent/agent
+        desc: You are a UI developer with deep HTML and CSS knowledge.
+        meta:
+          minimum_dify_version: 1.7.0
+          version: 0.0.2
+        output_schema: null
+        plugin_unique_identifier: langgenius/agent:0.0.24@0274c08e62efaa28f6327e7bdba655e16559ec28d4f41f2fa3ef553e6327c0f6
+        selected: false
+        title: Agent
+        tool_node_version: '2'
+        type: agent
+      height: 242
+      id: '1757467486717'
+      position:
+        x: 344.046149406966
+        y: 375
+      positionAbsolute:
+        x: 344.046149406966
+        y: 375
+      selected: true
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    viewport:
+      x: -25.583797010321177
+      y: -170.9807880608771
+      zoom: 0.9331610963020068
