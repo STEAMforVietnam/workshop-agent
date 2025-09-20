@@ -19,6 +19,28 @@ This repo contains:
 - Python 3.11+
 - See `pyproject.toml` for pinned dependencies (Streamlit, requests).
 
+### Set up Virtual Env (Mac)
+
+```bash
+python -m venv .venv
+source .venv/bin/activate
+pip install uv
+uv sync
+```
+
+### Set up Virtual Env (Windows)
+```shell
+python -m venv .venv
+.venv/Scripts/Activate.ps1
+pip install uv
+uv sync
+```
+### Check virtual env packages
+
+```
+pip list
+```
+
 ## Configuration
 
 The app needs the Dify API key and optional configuration. You can provide them via Streamlit secrets or environment variables.
@@ -33,8 +55,6 @@ Recommended: create a file `.streamlit/secrets.toml` with:
 [default]
 DIFY_API_KEY = "your_api_key_here"
 ```
-
-Or export env vars in your shell:
 
 ## Run
 
