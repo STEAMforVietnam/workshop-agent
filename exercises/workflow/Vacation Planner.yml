@@ -2502,20 +2502,23 @@ workflow:
               \ theo múi giờ nơi muốn đến và múi giờ Việt Nam\n## Yêu cầu kết quả\n\
               ### Một bản kế hoạch du lịch được viết dưới dạng MARKDOWN chia theo\
               \ ngày với đầy đủ các mục sau:\n1 Tiêu đề\n2. Phương tiện di chuyển,\
-              \ theo cấu trúc <emoji><phương tiện di chuyển>\n3. Khung giờ, ngày tháng,\
-              \ năm , ngày trong tuần (theo giờ nơi muốn đến)\n4. Địa điểm gợi ý và\
-              \ thông tin về chúng. Tại sao nên đi\n5. Các món ăn đặc sắc phải thử\
-              \ và thông tin về chúng. Tại sao nên ăn\n### Tìm kiếm hình ảnh đại diện\
-              \ cho nơi muốn đến và chèn vào MARKDOWN nói trên sau phần Tiêu đề\n\
-              ### Yêu cầu về format\n1. Tiêu đề là Heading1, Center, Bold, dùng mã\
-              \ màu #3250a8\n2. Các mục lớn còn lại dùng Heading 2, Left aligned,\
-              \ Bold, Dùng mã màu #3250a8\n3. Các tên địa danh, điạ điểm, món ăn đặc\
-              \ sắc gộp vào các mục nhỏ hơn, dùng Heading 3, Left aligned, dùng màu\
-              \ đen\n### Ví dụ:\n# Kế hoạch du lịch Hà Nội 36 phố phường\n![Hà Nội](hanoi.png)\n\
-              ## Phương tiện di chuyển: Máy bay\n## Thứ 2 ngày 1 tháng 1 giờ Việt\
-              \ Nam\n## Địa điểm gợi ý:\n### Lăng Bác\n- Tham dự Lễ Thượng Cờ lúc\
-              \ 6h sáng giờ Việt Nam\n## Món ăn đặc sắc phải thử\n### Phở:\n- Thông\
-              \ tin về phở ở Hà Nội"
+              \ theo cấu trúc <markdown emoji><phương tiện di chuyển>\n3. Khung giờ,\
+              \ ngày tháng, năm , ngày trong tuần (theo giờ nơi muốn đến)\n4. Địa\
+              \ điểm gợi ý và thông tin về chúng. Tại sao nên đi\n5. Các món ăn đặc\
+              \ sắc phải thử và thông tin về chúng. Tại sao nên ăn\n### Yêu cầu về\
+              \ format\n1. Tiêu đề là Heading1, Center, Bold, dùng mã màu #3250a8\n\
+              2. Các mục lớn còn lại dùng Heading 2, Left aligned, Bold, Dùng mã màu\
+              \ #3250a8\n3. Các tên địa danh, điạ điểm, món ăn đặc sắc gộp vào các\
+              \ mục nhỏ hơn, dùng Heading 3, Left aligned, dùng màu đen\n### Yêu cầu\
+              \ về đường dẫn (url)\n1. Nếu các địa điểm được bạn trích dẫn từ # Dữ\
+              \ liệu có các đường link hoặc địa chỉ, luôn luôn trích dẫn đường link\
+              \ hoặc địa chỉ theo cú pháp [label](http://example.com)\n### Ví dụ:\n\
+              # Kế hoạch du lịch Hà Nội 36 phố phường\n## Phương tiện di chuyển: :airplane:\
+              \  Máy bay \n## Thứ 2 ngày 1 tháng 1 giờ Việt Nam\n## Địa điểm gợi ý:\n\
+              ### Lăng Bác\n- Tham dự Lễ Thượng Cờ lúc 6h sáng giờ Việt Nam\n- địa\
+              \ điểm : [label](http://example.com)\n## Món ăn đặc sắc phải thử\n###\
+              \ Phở:\n- Thông tin về phở ở Hà Nội\n- địa chỉ [label](http://example.com)\n\
+              \n## Dữ liệu\n**Tổng hợp:**{{#1758330037761.text#}} \n**Chi tiết**{{#1758330037761.json#}}"
           maximum_iterations:
             type: constant
             value: 3
@@ -2523,7 +2526,7 @@ workflow:
             type: constant
             value:
               completion_params:
-                max_tokens: 2048
+                max_tokens: 4096
                 response_format: text
               mode: chat
               model: gpt-4o-mini
@@ -2532,10 +2535,9 @@ workflow:
               type: model-selector
           query:
             type: constant
-            value: "Lập bản kế hoạch du lịch 2 ngày 1 đêm cho {{#1758328671550.place_to_visit#}}\
-              \ vào khoảng thời gian {{#1758328671550.time_to_visit#}}dựa trên thông\
-              \ tin được cung cấp từ Researcher: \n**Tổng hợp:**{{#1758330037761.text#}}\
-              \ **Chi tiết**{{#1758330037761.json#}}"
+            value: Lập bản kế hoạch du lịch 2 ngày 1 đêm cho {{#1758328671550.place_to_visit#}}
+              vào khoảng thời gian {{#1758328671550.time_to_visit#}}dựa trên thông
+              tin được cung cấp từ Researcher
           tools:
             type: constant
             value:
@@ -2632,213 +2634,6 @@ workflow:
               tool_label: Weekday Calculator
               tool_name: weekday
               type: builtin
-            - enabled: true
-              extra:
-                description: Perform image searches on DuckDuckGo and get results.
-              parameters:
-                query:
-                  auto: 1
-                  value: null
-              provider_name: langgenius/duckduckgo/duckduckgo
-              provider_show_name: langgenius/duckduckgo/duckduckgo
-              schemas:
-              - auto_generate: null
-                default: null
-                form: llm
-                human_description:
-                  en_US: The search query.
-                  ja_JP: The search query.
-                  pt_BR: The search query.
-                  zh_Hans: 搜索查询语句。
-                label:
-                  en_US: Query string
-                  ja_JP: Query string
-                  pt_BR: Query string
-                  zh_Hans: 查询语句
-                llm_description: Key words for searching
-                max: null
-                min: null
-                name: query
-                options: []
-                placeholder: null
-                precision: null
-                required: true
-                scope: null
-                template: null
-                type: string
-              - auto_generate: null
-                default: 3
-                form: form
-                human_description:
-                  en_US: The max results.
-                  ja_JP: The max results.
-                  pt_BR: The max results.
-                  zh_Hans: 最大结果数量
-                label:
-                  en_US: Max results
-                  ja_JP: Max results
-                  pt_BR: Max results
-                  zh_Hans: 最大结果数量
-                llm_description: ''
-                max: null
-                min: null
-                name: max_results
-                options: []
-                placeholder: null
-                precision: null
-                required: true
-                scope: null
-                template: null
-                type: number
-              - auto_generate: null
-                default: null
-                form: form
-                human_description:
-                  en_US: Use when querying results within a specific time range only.
-                  ja_JP: Use when querying results within a specific time range only.
-                  pt_BR: Use when querying results within a specific time range only.
-                  zh_Hans: 只查询一定时间范围内的结果时使用
-                label:
-                  en_US: Result time limit
-                  ja_JP: Result time limit
-                  pt_BR: Result time limit
-                  zh_Hans: 结果时间限制
-                llm_description: ''
-                max: null
-                min: null
-                name: timelimit
-                options:
-                - icon: ''
-                  label:
-                    en_US: current day
-                    ja_JP: current day
-                    pt_BR: current day
-                    zh_Hans: 当天
-                  value: Day
-                - icon: ''
-                  label:
-                    en_US: current week
-                    ja_JP: current week
-                    pt_BR: current week
-                    zh_Hans: 本周
-                  value: Week
-                - icon: ''
-                  label:
-                    en_US: current month
-                    ja_JP: current month
-                    pt_BR: current month
-                    zh_Hans: 当月
-                  value: Month
-                - icon: ''
-                  label:
-                    en_US: current year
-                    ja_JP: current year
-                    pt_BR: current year
-                    zh_Hans: 今年
-                  value: Year
-                placeholder: null
-                precision: null
-                required: false
-                scope: null
-                template: null
-                type: select
-              - auto_generate: null
-                default: null
-                form: form
-                human_description:
-                  en_US: The size of the image to be searched.
-                  ja_JP: The size of the image to be searched.
-                  pt_BR: The size of the image to be searched.
-                  zh_Hans: 要搜索的图片的大小
-                label:
-                  en_US: image size
-                  ja_JP: image size
-                  pt_BR: image size
-                  zh_Hans: 图片大小
-                llm_description: ''
-                max: null
-                min: null
-                name: size
-                options:
-                - icon: ''
-                  label:
-                    en_US: small
-                    ja_JP: small
-                    pt_BR: small
-                    zh_Hans: 小
-                  value: Small
-                - icon: ''
-                  label:
-                    en_US: medium
-                    ja_JP: medium
-                    pt_BR: medium
-                    zh_Hans: 中
-                  value: Medium
-                - icon: ''
-                  label:
-                    en_US: large
-                    ja_JP: large
-                    pt_BR: large
-                    zh_Hans: 大
-                  value: Large
-                - icon: ''
-                  label:
-                    en_US: xl
-                    ja_JP: xl
-                    pt_BR: xl
-                    zh_Hans: 超大
-                  value: Wallpaper
-                placeholder: null
-                precision: null
-                required: false
-                scope: null
-                template: null
-                type: select
-              - auto_generate: null
-                default: null
-                form: form
-                human_description:
-                  en_US: 'Supports http/https/socks proxies. Example: http://user:pass@example.com:3128.'
-                  ja_JP: 'Supports http/https/socks proxies. Example: http://user:pass@example.com:3128.'
-                  pt_BR: 'Supports http/https/socks proxies. Example: http://user:pass@example.com:3128.'
-                  zh_Hans: 支持 http/https/socks 代理。示例：http://user:pass@example.com:3128。
-                label:
-                  en_US: Proxy server
-                  ja_JP: Proxy server
-                  pt_BR: Proxy server
-                  zh_Hans: 代理服务器
-                llm_description: ''
-                max: null
-                min: null
-                name: proxy_server
-                options: []
-                placeholder: null
-                precision: null
-                required: false
-                scope: null
-                template: null
-                type: string
-              settings:
-                max_results:
-                  value:
-                    type: constant
-                    value: 3
-                proxy_server:
-                  value:
-                    type: mixed
-                    value: null
-                size:
-                  value:
-                    type: constant
-                    value: null
-                timelimit:
-                  value:
-                    type: constant
-                    value: null
-              tool_description: Perform image searches on DuckDuckGo and get results.
-              tool_label: DuckDuckGo Image Search
-              tool_name: ddgo_img
-              type: builtin
         agent_strategy_label: ReAct
         agent_strategy_name: ReAct
         agent_strategy_provider_name: langgenius/agent/agent
@@ -2848,7 +2643,7 @@ workflow:
           version: 0.0.2
         output_schema: null
         plugin_unique_identifier: langgenius/agent:0.0.24@0274c08e62efaa28f6327e7bdba655e16559ec28d4f41f2fa3ef553e6327c0f6
-        selected: true
+        selected: false
         title: Planner
         tool_node_version: '2'
         type: agent
@@ -2889,6 +2684,6 @@ workflow:
       type: custom
       width: 244
     viewport:
-      x: -107.24179362599023
-      y: -90.56928318235111
-      zoom: 0.934827588709019
+      x: -255.36138899856422
+      y: -47.71462685720576
+      zoom: 0.7501889551058549
