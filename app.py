@@ -72,7 +72,7 @@ st.markdown("""
 </style>
 """, unsafe_allow_html=True)
 
-st.title("AI Portfolio Generator")
+st.title("AI Vacation Planner")
 st.markdown("Fill your details, generate via Dify, preview and download.")
 
 # Minimal sidebar: only show a reminder if missing API key
@@ -82,8 +82,8 @@ with st.sidebar:
 
 # Load portfolio data if selected from history
 default_values = {
-    "place_to_visit": "Trần Khánh Thành",
-    "time_to_visit": "Software Engineer", 
+    "place_to_visit": "Huế",
+    "time_to_visit": "06/2025", 
 }
 
 # No history loading in simplified UI
@@ -105,8 +105,8 @@ if submitted:
 
     # Chuẩn hoá inputs theo ví dụ bạn đưa:
     inputs = {
-        "full_name": place_to_visit.strip(),
-        "job_title": time_to_visit.strip(),
+        "place_to_visit": place_to_visit.strip(),
+        "time_to_visit": time_to_visit.strip(),
         
         # Nếu workflow của bạn có sử dụng các sys.* thì có thể truyền thêm:
         # "sys.files": [],  # ở dưới có ví dụ chuyển file -> base64/URL nếu cần
@@ -124,13 +124,14 @@ if submitted:
 
     status = result.get("status_code", 0)
     response = result.get("json", {})
-    
+    print(response)
     # Simplified result: only Preview and Download
-    if output := response.get("output"):
+    if output := response.get("data").get("outputs").get("output"):
         st.markdown("### Preview")
+        st.markdown(output)
         # Robust new-tab open using a Blob (works even when data: URLs are blocked)
-        render_open_new_tab_button(output, label="Open Preview in New Tab")
-        get_html_preview_component(output, height=600)
+        # render_open_new_tab_button(output, label="Open Preview in New Tab")
+        # get_html_preview_component(output, height=600)
 
         st.download_button(
             "Download Plan",
