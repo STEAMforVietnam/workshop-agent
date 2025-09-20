@@ -30,17 +30,23 @@ Khi chọn vào **Plugins**  như hình dưới, chúng ta sẽ thấy phần **
 
 #### Bước 2.b: cài đặt các `Tools` khác từ **Marketplace**
 Các bạn cài đặt các Tools sau từ **Marketplace**:  
-- 
+- DuckDuckGo: A privacy-focused search engine
+- Wikipedia: 
 
 ---
 ### Bước 3: Tạo một workflow với Agents và chạy thử  
+(Cùng thực hành)
 
 ---
 ### Bước 4: Publish workflow  
 ![alt text](image-1.png)
 
 
-### Nguồn tham khảo
+### Nguồn tham khảo thêm
+ 
+Đọc thêm về chính sách bảo mật thư viện của Dify  
+https://dify.ai/blog/introducing-dify-plugins
 
-
+---
+*Disclaimer: Lưu ý, khi tải các thư viện để tích hợp về dùng, các bạn cần tìm hiểu rõ về các thư viện nói trên và cẩn trọng trong việc sử dụng. Các thư viện được đề cập trong workshop được dùng để phục vụ cho mục đích học tập.*
 

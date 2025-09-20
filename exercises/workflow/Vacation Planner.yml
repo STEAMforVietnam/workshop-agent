@@ -1,0 +1,1014 @@
+app:
+  description: ''
+  icon: 🤖
+  icon_background: '#FFEAD5'
+  mode: workflow
+  name: Vacation Planner
+  use_icon_as_answer_icon: false
+dependencies: []
+kind: app
+version: 0.4.0
+workflow:
+  conversation_variables: []
+  environment_variables: []
+  features:
+    file_upload:
+      allowed_file_extensions:
+      - .JPG
+      - .JPEG
+      - .PNG
+      - .GIF
+      - .WEBP
+      - .SVG
+      allowed_file_types:
+      - image
+      allowed_file_upload_methods:
+      - local_file
+      - remote_url
+      enabled: false
+      fileUploadConfig:
+        audio_file_size_limit: 50
+        batch_count_limit: 5
+        file_size_limit: 15
+        image_file_size_limit: 10
+        video_file_size_limit: 100
+        workflow_file_upload_limit: 10
+      image:
+        enabled: false
+        number_limits: 3
+        transfer_methods:
+        - local_file
+        - remote_url
+      number_limits: 3
+    opening_statement: ''
+    retriever_resource:
+      enabled: true
+    sensitive_word_avoidance:
+      enabled: false
+    speech_to_text:
+      enabled: false
+    suggested_questions: []
+    suggested_questions_after_answer:
+      enabled: false
+    text_to_speech:
+      enabled: false
+      language: ''
+      voice: ''
+  graph:
+    edges:
+    - data:
+        isInLoop: false
+        sourceType: start
+        targetType: agent
+      id: 1758328671550-source-1758330037761-target
+      source: '1758328671550'
+      sourceHandle: source
+      target: '1758330037761'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: agent
+        targetType: end
+      id: 1758333625330-source-1758333617238-target
+      source: '1758333625330'
+      sourceHandle: source
+      target: '1758333617238'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: agent
+        targetType: agent
+      id: 1758330037761-source-1758333625330-target
+      source: '1758330037761'
+      sourceHandle: source
+      target: '1758333625330'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    nodes:
+    - data:
+        desc: ''
+        selected: false
+        title: Start
+        type: start
+        variables:
+        - label: Nơi muốn đến
+          max_length: 48
+          options: []
+          required: true
+          type: text-input
+          variable: place_to_visit
+        - label: Thời gian muốn đi
+          max_length: 48
+          options: []
+          required: true
+          type: text-input
+          variable: time_to_visit
+      height: 116
+      id: '1758328671550'
+      position:
+        x: 30
+        y: 321
+      positionAbsolute:
+        x: 30
+        y: 321
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        agent_parameters:
+          instruction:
+            type: constant
+            value: "## Vai trò\nBạn là một chuyên gia nghiên cứu về văn hóa và tư\
+              \ vấn du lịch cho người Việt Nam\n\n## Ngữ cảnh\n**Sứ mệnh của bạn**:\
+              \ Cung cấp chính xác và đẩy đủ thông tin yêu cầu, bằng cách tra cứu\
+              \ với các công cụ tìm kiêm như DuckDuckGo Search hoặc Wikipedia Search.\
+              \ Bạn luôn đảm bảo thông tin cung cấp được đầy đủ nhất có thể.\n\n###\
+              \ 1. Đảm bảo tính minh bạch và khách quan: Thông tin cung cấp phải đến\
+              \ từ nhiều nguồn, và có thể tra cứu được.\n### 2. Không bịa đặt thông\
+              \ tin: Bạn không được quyền thêm thắt các thông tin không có trong kết\
+              \ quả tìm kiếm.\n### 3. Đảm bảo thông tin phù hợp với ngữ cảnh văn hóa\
+              \ du lịch: Chỉ tìm các thông tin liên quan đến văn hóa và du lịch được\
+              \ liệt kê ở phần ## Yêu cầu kết quả\n### 4. Đảm bảo thông tin phù hợp:\
+              \ Các thông tin bạn cung cấp cần phù hợp với thuần phong mỹ tục, phù\
+              \ hợp với văn hóa của người Việt và pháp luật Việt Nam. \n### 5. Đảm\
+              \ bảo thông tin đến từ các trang chính thống: Luôn luôn sử dụng thông\
+              \ tin từ đến từ các trang chính thống, ví dụ như .gov, .org, .edu các\
+              \ viện bảo tàng, thư viện lớn, viện bảo tàng, báo chí hoặc các trang\
+              \ web uy tín rank cao. \n\n## Yêu cầu kết quả\nTừ yêu cầu ngừoi dùng,\
+              \ hãy tìm hiểu ĐẦY ĐỦ sau đó TÓM TẮT các nội dung tìm được thành một\
+              \ văn bản Markdown với các mục chính sau\n\n1. Vị trí địa lý, khí hậu,\
+              \ thời tiết vào thời điểm muốn đi \n2. Các di sản văn hóa vật thể hoặc\
+              \ phi vật thể\n3. Các địa điểm du ngoạn đặc sắc không thể bỏ qua\n4.\
+              \ Các món ăn đặc sắc\n\nCHỈ hoàn thành công việc của bạn khi đã tìm\
+              \ hiểu đầy đủ"
+          model:
+            type: constant
+            value:
+              completion_params:
+                response_format: text
+              mode: chat
+              model: gpt-4o-mini
+              model_type: llm
+              provider: langgenius/openai/openai
+              type: model-selector
+          query:
+            type: constant
+            value: Hãy tìm hiểu thông tin về {{#1758328671550.place_to_visit#}} cho
+              khoảng thời gian muốn đi {{#1758328671550.time_to_visit#}}
+          tools:
+            type: constant
+            value:
+            - enabled: true
+              extra:
+                description: Perform searches on DuckDuckGo and get results.
+              parameters:
+                query:
+                  auto: 1
+                  value: null
+              provider_name: langgenius/duckduckgo/duckduckgo
+              provider_show_name: langgenius/duckduckgo/duckduckgo
+              schemas:
+              - auto_generate: null
+                default: null
+                form: llm
+                human_description:
+                  en_US: The search query.
+                  ja_JP: The search query.
+                  pt_BR: The search query.
+                  zh_Hans: 搜索查询语句。
+                label:
+                  en_US: Query string
+                  ja_JP: Query string
+                  pt_BR: Query string
+                  zh_Hans: 查询语句
+                llm_description: Key words for searching
+                max: null
+                min: null
+                name: query
+                options: []
+                placeholder: null
+                precision: null
+                required: true
+                scope: null
+                template: null
+                type: string
+              - auto_generate: null
+                default: 5
+                form: form
+                human_description:
+                  en_US: The maximum number of results to return.
+                  ja_JP: The maximum number of results to return.
+                  pt_BR: The maximum number of results to return.
+                  zh_Hans: 最大结果数量
+                label:
+                  en_US: Max results
+                  ja_JP: Max results
+                  pt_BR: Max results
+                  zh_Hans: 最大结果数量
+                llm_description: ''
+                max: null
+                min: null
+                name: max_results
+                options: []
+                placeholder: null
+                precision: null
+                required: true
+                scope: null
+                template: null
+                type: number
+              - auto_generate: null
+                default: 0
+                form: form
+                human_description:
+                  en_US: Whether to pass the search results to llm for summarization.
+                  ja_JP: Whether to pass the search results to llm for summarization.
+                  pt_BR: Whether to pass the search results to llm for summarization.
+                  zh_Hans: 是否需要将搜索结果传给大模型总结
+                label:
+                  en_US: Require Summary
+                  ja_JP: Require Summary
+                  pt_BR: Require Summary
+                  zh_Hans: 是否总结
+                llm_description: ''
+                max: null
+                min: null
+                name: require_summary
+                options: []
+                placeholder: null
+                precision: null
+                required: false
+                scope: null
+                template: null
+                type: boolean
+              - auto_generate: null
+                default: null
+                form: form
+                human_description:
+                  en_US: 'Supports http/https/socks proxies. Example: http://user:pass@example.com:3128.'
+                  ja_JP: 'Supports http/https/socks proxies. Example: http://user:pass@example.com:3128.'
+                  pt_BR: 'Supports http/https/socks proxies. Example: http://user:pass@example.com:3128.'
+                  zh_Hans: 支持 http/https/socks 代理。示例：http://user:pass@example.com:3128。
+                label:
+                  en_US: Proxy server
+                  ja_JP: Proxy server
+                  pt_BR: Proxy server
+                  zh_Hans: 代理服务器
+                llm_description: ''
+                max: null
+                min: null
+                name: proxy_server
+                options: []
+                placeholder: null
+                precision: null
+                required: false
+                scope: null
+                template: null
+                type: string
+              settings:
+                max_results:
+                  value:
+                    type: constant
+                    value: 5
+                proxy_server:
+                  value:
+                    type: mixed
+                    value: null
+                require_summary:
+                  value:
+                    type: constant
+                    value: 0
+              tool_description: Perform searches on DuckDuckGo and get results.
+              tool_label: DuckDuckGo Search
+              tool_name: ddgo_search
+              type: builtin
+            - enabled: true
+              extra:
+                description: A tool for performing a Wikipedia search and extracting
+                  snippets and webpages.
+              parameters:
+                language:
+                  auto: 1
+                  value: null
+                query:
+                  auto: 1
+                  value: null
+              provider_name: langgenius/wikipedia/wikipedia
+              provider_show_name: langgenius/wikipedia/wikipedia
+              schemas:
+              - auto_generate: null
+                default: null
+                form: llm
+                human_description:
+                  en_US: key words for searching
+                  ja_JP: key words for searching
+                  pt_BR: key words for searching
+                  zh_Hans: 查询关键词
+                label:
+                  en_US: Query string
+                  ja_JP: Query string
+                  pt_BR: Query string
+                  zh_Hans: 查询语句
+                llm_description: key words for searching, this should be in the language
+                  of "language" parameter
+                max: null
+                min: null
+                name: query
+                options: []
+                placeholder: null
+                precision: null
+                required: true
+                scope: null
+                template: null
+                type: string
+              - auto_generate: null
+                default: null
+                form: llm
+                human_description:
+                  en_US: The language of the Wikipedia to be searched
+                  ja_JP: The language of the Wikipedia to be searched
+                  pt_BR: The language of the Wikipedia to be searched
+                  zh_Hans: 要搜索的维基百科语言
+                label:
+                  en_US: Language
+                  ja_JP: Language
+                  pt_BR: Language
+                  zh_Hans: 语言
+                llm_description: language of the wikipedia to be searched, only "de"
+                  for German, "en" for English, "fr" for French, "hi" for Hindi, "ja"
+                  for Japanese, "ko" for Korean, "pl" for Polish, "pt" for Portuguese,
+                  "ro" for Romanian, "uk" for Ukrainian, "vi" for Vietnamese, and
+                  "zh" for Chinese are supported
+                max: null
+                min: null
+                name: language
+                options:
+                - icon: ''
+                  label:
+                    en_US: German
+                    ja_JP: German
+                    pt_BR: German
+                    zh_Hans: 德语
+                  value: de
+                - icon: ''
+                  label:
+                    en_US: English
+                    ja_JP: English
+                    pt_BR: English
+                    zh_Hans: 英语
+                  value: en
+                - icon: ''
+                  label:
+                    en_US: French
+                    ja_JP: French
+                    pt_BR: French
+                    zh_Hans: 法语
+                  value: fr
+                - icon: ''
+                  label:
+                    en_US: Hindi
+                    ja_JP: Hindi
+                    pt_BR: Hindi
+                    zh_Hans: 印地语
+                  value: hi
+                - icon: ''
+                  label:
+                    en_US: Japanese
+                    ja_JP: Japanese
+                    pt_BR: Japanese
+                    zh_Hans: 日语
+                  value: ja
+                - icon: ''
+                  label:
+                    en_US: Korean
+                    ja_JP: Korean
+                    pt_BR: Korean
+                    zh_Hans: 韩语
+                  value: ko
+                - icon: ''
+                  label:
+                    en_US: Polish
+                    ja_JP: Polish
+                    pt_BR: Polish
+                    zh_Hans: 波兰语
+                  value: pl
+                - icon: ''
+                  label:
+                    en_US: Portuguese
+                    ja_JP: Portuguese
+                    pt_BR: Portuguese
+                    zh_Hans: 葡萄牙语
+                  value: pt
+                - icon: ''
+                  label:
+                    en_US: Romanian
+                    ja_JP: Romanian
+                    pt_BR: Romanian
+                    zh_Hans: 罗马尼亚语
+                  value: ro
+                - icon: ''
+                  label:
+                    en_US: Ukrainian
+                    ja_JP: Ukrainian
+                    pt_BR: Ukrainian
+                    zh_Hans: 乌克兰语
+                  value: uk
+                - icon: ''
+                  label:
+                    en_US: Vietnamese
+                    ja_JP: Vietnamese
+                    pt_BR: Vietnamese
+                    zh_Hans: 越南语
+                  value: vi
+                - icon: ''
+                  label:
+                    en_US: Chinese
+                    ja_JP: Chinese
+                    pt_BR: Chinese
+                    zh_Hans: 中文
+                  value: zh
+                placeholder: null
+                precision: null
+                required: true
+                scope: null
+                template: null
+                type: string
+              settings: {}
+              tool_description: A tool for performing a Wikipedia search and extracting
+                snippets and webpages.
+              tool_label: WikipediaSearch
+              tool_name: wikipedia_search
+              type: builtin
+            - enabled: true
+              extra:
+                description: Perform image searches on DuckDuckGo and get results.
+              parameters:
+                query:
+                  auto: 1
+                  value: null
+              provider_name: langgenius/duckduckgo/duckduckgo
+              provider_show_name: langgenius/duckduckgo/duckduckgo
+              schemas:
+              - auto_generate: null
+                default: null
+                form: llm
+                human_description:
+                  en_US: The search query.
+                  ja_JP: The search query.
+                  pt_BR: The search query.
+                  zh_Hans: 搜索查询语句。
+                label:
+                  en_US: Query string
+                  ja_JP: Query string
+                  pt_BR: Query string
+                  zh_Hans: 查询语句
+                llm_description: Key words for searching
+                max: null
+                min: null
+                name: query
+                options: []
+                placeholder: null
+                precision: null
+                required: true
+                scope: null
+                template: null
+                type: string
+              - auto_generate: null
+                default: 3
+                form: form
+                human_description:
+                  en_US: The max results.
+                  ja_JP: The max results.
+                  pt_BR: The max results.
+                  zh_Hans: 最大结果数量
+                label:
+                  en_US: Max results
+                  ja_JP: Max results
+                  pt_BR: Max results
+                  zh_Hans: 最大结果数量
+                llm_description: ''
+                max: null
+                min: null
+                name: max_results
+                options: []
+                placeholder: null
+                precision: null
+                required: true
+                scope: null
+                template: null
+                type: number
+              - auto_generate: null
+                default: null
+                form: form
+                human_description:
+                  en_US: Use when querying results within a specific time range only.
+                  ja_JP: Use when querying results within a specific time range only.
+                  pt_BR: Use when querying results within a specific time range only.
+                  zh_Hans: 只查询一定时间范围内的结果时使用
+                label:
+                  en_US: Result time limit
+                  ja_JP: Result time limit
+                  pt_BR: Result time limit
+                  zh_Hans: 结果时间限制
+                llm_description: ''
+                max: null
+                min: null
+                name: timelimit
+                options:
+                - icon: ''
+                  label:
+                    en_US: current day
+                    ja_JP: current day
+                    pt_BR: current day
+                    zh_Hans: 当天
+                  value: Day
+                - icon: ''
+                  label:
+                    en_US: current week
+                    ja_JP: current week
+                    pt_BR: current week
+                    zh_Hans: 本周
+                  value: Week
+                - icon: ''
+                  label:
+                    en_US: current month
+                    ja_JP: current month
+                    pt_BR: current month
+                    zh_Hans: 当月
+                  value: Month
+                - icon: ''
+                  label:
+                    en_US: current year
+                    ja_JP: current year
+                    pt_BR: current year
+                    zh_Hans: 今年
+                  value: Year
+                placeholder: null
+                precision: null
+                required: false
+                scope: null
+                template: null
+                type: select
+              - auto_generate: null
+                default: null
+                form: form
+                human_description:
+                  en_US: The size of the image to be searched.
+                  ja_JP: The size of the image to be searched.
+                  pt_BR: The size of the image to be searched.
+                  zh_Hans: 要搜索的图片的大小
+                label:
+                  en_US: image size
+                  ja_JP: image size
+                  pt_BR: image size
+                  zh_Hans: 图片大小
+                llm_description: ''
+                max: null
+                min: null
+                name: size
+                options:
+                - icon: ''
+                  label:
+                    en_US: small
+                    ja_JP: small
+                    pt_BR: small
+                    zh_Hans: 小
+                  value: Small
+                - icon: ''
+                  label:
+                    en_US: medium
+                    ja_JP: medium
+                    pt_BR: medium
+                    zh_Hans: 中
+                  value: Medium
+                - icon: ''
+                  label:
+                    en_US: large
+                    ja_JP: large
+                    pt_BR: large
+                    zh_Hans: 大
+                  value: Large
+                - icon: ''
+                  label:
+                    en_US: xl
+                    ja_JP: xl
+                    pt_BR: xl
+                    zh_Hans: 超大
+                  value: Wallpaper
+                placeholder: null
+                precision: null
+                required: false
+                scope: null
+                template: null
+                type: select
+              - auto_generate: null
+                default: null
+                form: form
+                human_description:
+                  en_US: 'Supports http/https/socks proxies. Example: http://user:pass@example.com:3128.'
+                  ja_JP: 'Supports http/https/socks proxies. Example: http://user:pass@example.com:3128.'
+                  pt_BR: 'Supports http/https/socks proxies. Example: http://user:pass@example.com:3128.'
+                  zh_Hans: 支持 http/https/socks 代理。示例：http://user:pass@example.com:3128。
+                label:
+                  en_US: Proxy server
+                  ja_JP: Proxy server
+                  pt_BR: Proxy server
+                  zh_Hans: 代理服务器
+                llm_description: ''
+                max: null
+                min: null
+                name: proxy_server
+                options: []
+                placeholder: null
+                precision: null
+                required: false
+                scope: null
+                template: null
+                type: string
+              settings:
+                max_results:
+                  value:
+                    type: constant
+                    value: 3
+                proxy_server:
+                  value:
+                    type: mixed
+                    value: null
+                size:
+                  value:
+                    type: constant
+                    value: null
+                timelimit:
+                  value:
+                    type: constant
+                    value: null
+              tool_description: Perform image searches on DuckDuckGo and get results.
+              tool_label: DuckDuckGo Image Search
+              tool_name: ddgo_img
+              type: builtin
+            - enabled: true
+              extra:
+                description: Generate .md file from Markdown text
+              parameters:
+                md_text:
+                  auto: 1
+                  value: null
+                output_filename:
+                  auto: 1
+                  value: null
+              provider_name: bowenliang123/md_exporter/md_exporter
+              provider_show_name: bowenliang123/md_exporter/md_exporter
+              schemas:
+              - auto_generate: null
+                default: null
+                form: llm
+                human_description:
+                  en_US: Markdown text
+                  ja_JP: Markdown text
+                  pt_BR: Markdown text
+                  zh_Hans: Markdown格式文本
+                label:
+                  en_US: Markdown text
+                  ja_JP: Markdown text
+                  pt_BR: Markdown text
+                  zh_Hans: Markdown格式文本
+                llm_description: ''
+                max: null
+                min: null
+                name: md_text
+                options: []
+                placeholder: null
+                precision: null
+                required: true
+                scope: null
+                template: null
+                type: string
+              - auto_generate: null
+                default: null
+                form: llm
+                human_description:
+                  en_US: Optional custom output file name, and the filename suffix
+                    is not required.
+                  ja_JP: Optional custom output file name, and the filename suffix
+                    is not required.
+                  pt_BR: Optional custom output file name, and the filename suffix
+                    is not required.
+                  zh_Hans: 可选的自定义输出文件名，后缀名无需指定
+                label:
+                  en_US: Output Filename
+                  ja_JP: Output Filename
+                  pt_BR: Output Filename
+                  zh_Hans: 输出文件名
+                llm_description: ''
+                max: null
+                min: null
+                name: output_filename
+                options: []
+                placeholder: null
+                precision: null
+                required: false
+                scope: null
+                template: null
+                type: string
+              settings: {}
+              tool_description: Generate .md file from Markdown text
+              tool_label: Markdown to md file
+              tool_name: md_to_md
+              type: builtin
+        agent_strategy_label: ReAct
+        agent_strategy_name: ReAct
+        agent_strategy_provider_name: langgenius/agent/agent
+        desc: Chuyên viên nghiên cứu văn hóa và du lịch
+        meta:
+          minimum_dify_version: 1.7.0
+          version: 0.0.2
+        output_schema: null
+        plugin_unique_identifier: langgenius/agent:0.0.24@0274c08e62efaa28f6327e7bdba655e16559ec28d4f41f2fa3ef553e6327c0f6
+        selected: false
+        title: Researcher
+        tool_node_version: '2'
+        type: agent
+      height: 242
+      id: '1758330037761'
+      position:
+        x: 334
+        y: 321
+      positionAbsolute:
+        x: 334
+        y: 321
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        desc: ''
+        outputs:
+        - value_selector:
+          - '1758333625330'
+          - text
+          value_type: string
+          variable: output
+        selected: false
+        title: End
+        type: end
+      height: 90
+      id: '1758333617238'
+      position:
+        x: 1246
+        y: 321
+      positionAbsolute:
+        x: 1246
+        y: 321
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        agent_parameters:
+          instruction:
+            type: constant
+            value: "## Vai trò\nBạn là một chuyên gia lập kế hoạch và tư vấn du lịch\
+              \ cho người Việt Nam\n## Ngữ cảnh\n**Sứ mệnh của bạn**: Mang đến cho\
+              \ người dùng trải nghiệm du lịch phong phú, gần gũi và phù hợp với yêu\
+              \ cầu. Bạn tạo kế hoạch du lịch chi tiết dựa trên các thông tin được\
+              \ cung cấp về nơi muốn đến và thời gian muốn đi.\n### 1. Đảm bảo phù\
+              \ hợp với điều kiện của người dùng\n### 2. Không bịa đặt thông tin:\
+              \ Bạn không được quyền thêm thắt các thông tin không có trong phần được\
+              \ cung cấp.\n### 3. Đảm bảo lịch trình phù hợp với ngữ cảnh văn hóa\
+              \ du lịch: Chỉ thêm các mục liên quan đến văn hóa, du lịch, ẩm thực\
+              \ trong kế hoạch\n### 4. Đảm bảo tính nhất quán: Các mục trong kế hoạch\
+              \ phải nhất quán về mặt thời gian và tạo điều kiện cho người dùng thoải\
+              \ mái nhất có thể \n### 5. Đảm bảo tính chuyên nghiệp: Các mục trong\
+              \ kế hoạch cần mạch lạc, trình bày súc tích, nhưng vẫn đầy đủ thông\
+              \ tin \n### 6. Đảm bảo yếu tố giờ giấc: để người dùng dễ dàng theo dõi\
+              \ kế hoạch, tất cả ngày giờ đều phải thêm ngày trong tuần, và thể hiện\
+              \ theo múi giờ nơi muốn đến và múi giờ Việt Nam\n## Yêu cầu kết quả\n\
+              1. Một bản kế hoạch du lịch được viết dưới dạng MARKDOWN chia theo ngày\
+              \ với đầy đủ các mục sau:\n1 Tiêu đề\n2. Phương tiện di chuyển, theo\
+              \ cấu trúc <emoji><phương tiện di chuyển>\n3. Khung giờ, ngày tháng,\
+              \ năm , ngày trong tuần (theo giờ nơi muốn đến)\n4. Địa điểm gợi ý và\
+              \ thông tin về chúng. Tại sao nên đi\n5. Các món ăn đặc sắc phải thử\
+              \ và thông tin về chúng. Tại sao nên ăn\n### Yêu cầu về format\n1. Tiêu\
+              \ đề là Heading1, Center, Bold, dùng mã màu #3250a8\n2. Các mục lớn\
+              \ còn lại dùng Heading 2, Left aligned, Bold, Dùng mã màu #3250a8\n\
+              3. Các tên địa danh, điạ điểm, món ăn đặc sắc gộp vào các mục nhỏ hơn,\
+              \ dùng Heading 3, Left aligned, dùng màu đen\n### Ví dụ:\n# Kế hoạch\
+              \ du lịch Hà Nội 36 phố phường\n## Phương tiện di chuyển: Máy bay\n\
+              ## Thứ 2 ngày 1 tháng 1 giờ Việt Nam\n## Địa điểm gợi ý:\n### Lăng Bác\n\
+              - Tham dự Lễ Thượng Cờ lúc 6h sáng giờ Việt Nam\n\n## Món ăn đặc sắc\
+              \ phải thử\n### Phở:\n- Thông tin về phở ở Hà Nội\n/"
+          model:
+            type: constant
+            value:
+              completion_params:
+                max_tokens: 2048
+                response_format: text
+              mode: chat
+              model: gpt-4o-mini
+              model_type: llm
+              provider: langgenius/openai/openai
+              type: model-selector
+          query:
+            type: constant
+            value: Lập bản kế hoạch du lịch 2 ngày 1 đêm dựa trên thông tin được cung
+              cấp từ Researcher:{{#1758330037761.text#}}
+          tools:
+            type: constant
+            value:
+            - enabled: true
+              extra:
+                description: A tool for calculating the weekday of a given date.
+              parameters:
+                day:
+                  auto: 1
+                  value: null
+                month:
+                  auto: 1
+                  value: null
+                year:
+                  auto: 1
+                  value: null
+              provider_name: time
+              provider_show_name: time
+              schemas:
+              - auto_generate: null
+                default: null
+                form: llm
+                human_description:
+                  en_US: Year
+                  ja_JP: Year
+                  pt_BR: Year
+                  zh_Hans: 年
+                label:
+                  en_US: Year
+                  ja_JP: Year
+                  pt_BR: Year
+                  zh_Hans: 年
+                llm_description: null
+                max: null
+                min: null
+                name: year
+                options: []
+                placeholder: null
+                precision: null
+                required: true
+                scope: null
+                template: null
+                type: number
+              - auto_generate: null
+                default: null
+                form: llm
+                human_description:
+                  en_US: Month
+                  ja_JP: Month
+                  pt_BR: Month
+                  zh_Hans: 月
+                label:
+                  en_US: Month
+                  ja_JP: Month
+                  pt_BR: Month
+                  zh_Hans: 月
+                llm_description: null
+                max: null
+                min: null
+                name: month
+                options: []
+                placeholder: null
+                precision: null
+                required: true
+                scope: null
+                template: null
+                type: number
+              - auto_generate: null
+                default: null
+                form: llm
+                human_description:
+                  en_US: day
+                  ja_JP: day
+                  pt_BR: day
+                  zh_Hans: 日
+                label:
+                  en_US: day
+                  ja_JP: day
+                  pt_BR: day
+                  zh_Hans: 日
+                llm_description: null
+                max: null
+                min: null
+                name: day
+                options: []
+                placeholder: null
+                precision: null
+                required: true
+                scope: null
+                template: null
+                type: number
+              settings: {}
+              tool_description: A tool for calculating the weekday of a given date.
+              tool_label: Weekday Calculator
+              tool_name: weekday
+              type: builtin
+            - enabled: true
+              extra:
+                description: A tool for timestamp convert to localtime
+              parameters:
+                timestamp:
+                  auto: 1
+                  value: null
+                timezone:
+                  auto: 1
+                  value: null
+              provider_name: time
+              provider_show_name: time
+              schemas:
+              - auto_generate: null
+                default: null
+                form: llm
+                human_description:
+                  en_US: Timestamp
+                  ja_JP: Timestamp
+                  pt_BR: Timestamp
+                  zh_Hans: 时间戳
+                label:
+                  en_US: Timestamp
+                  ja_JP: Timestamp
+                  pt_BR: Timestamp
+                  zh_Hans: 时间戳
+                llm_description: null
+                max: null
+                min: null
+                name: timestamp
+                options: []
+                placeholder: null
+                precision: null
+                required: true
+                scope: null
+                template: null
+                type: number
+              - auto_generate: null
+                default: Asia/Shanghai
+                form: llm
+                human_description:
+                  en_US: Timezone, such as Asia/Shanghai
+                  ja_JP: Timezone, such as Asia/Shanghai
+                  pt_BR: Timezone, such as Asia/Shanghai
+                  zh_Hans: 时区，比如 Asia/Shanghai
+                label:
+                  en_US: Timezone
+                  ja_JP: Timezone
+                  pt_BR: Timezone
+                  zh_Hans: 时区
+                llm_description: null
+                max: null
+                min: null
+                name: timezone
+                options: []
+                placeholder: null
+                precision: null
+                required: false
+                scope: null
+                template: null
+                type: string
+              settings: {}
+              tool_description: A tool for timestamp convert to localtime
+              tool_label: Timestamp to localtime
+              tool_name: timestamp_to_localtime
+              type: builtin
+        agent_strategy_label: ReAct
+        agent_strategy_name: ReAct
+        agent_strategy_provider_name: langgenius/agent/agent
+        desc: Chuyên gia lập kế hoạch du lịch
+        meta:
+          minimum_dify_version: 1.7.0
+          version: 0.0.2
+        output_schema: null
+        plugin_unique_identifier: langgenius/agent:0.0.24@0274c08e62efaa28f6327e7bdba655e16559ec28d4f41f2fa3ef553e6327c0f6
+        selected: false
+        title: Planner
+        tool_node_version: '2'
+        type: agent
+      height: 226
+      id: '1758333625330'
+      position:
+        x: 656.963313301184
+        y: 321
+      positionAbsolute:
+        x: 656.963313301184
+        y: 321
+      selected: true
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    viewport:
+      x: 68.78478026018706
+      y: -97.45751823220075
+      zoom: 1.1236634761963775
