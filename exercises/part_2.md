@@ -10,14 +10,17 @@ Mở `Setting` của workflow trong Dify
 
 ![alt text](image.png)  
 
+---
 ### Bước 2: tạo 1 file `.env`  
 
+---
 ### Bước 3: set biến DIFY_API_KEY trong `.env`
 
 ```
 DIFY_API_KEY=thay API key
 ```
 
+---
 ### Bước 4: Chỉnh sửa Payload  
 Để gửi yêu cầu (request) đến Dify để xử lý, chúng ta cần gửi đúng cấu trúc của REST API như sau
 
@@ -63,11 +66,13 @@ payload = {
 ```
 
 Ở Dify, chúng ta có thể tìm được hầu hết các chỉ dẫn sử dụng API của họ trong **Documentation**
+---
 
-#### Nguồn  
-Học thêm về API:
+### Bước 5: Tự thực hành
+#### Thêm một biến (variable) vào `inputs`
 
-Học thêm về Streamlit:
+Thử tạo một biến `preferences` và đưa vào Dify 
 
+## Nguồn tham khảo
 Dify API Docs: https://docs.dify.ai/api-reference/workflow-execution/execute-workflow  
 
