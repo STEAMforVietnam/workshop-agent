@@ -50,6 +50,10 @@ việc của chúng ta là điền vào các arguments
 Paste đoạn code sau vào `...` tương ứng 
 
 ```python
+headers = {
+        "Authorization": f"Bearer {os.getenv("DIFY_API_KEY")}",
+        "Content-Type": "application/json",
+    }
 url = f"https://api.dify.ai/v1/workflows/run"
 payload = {
     "inputs": inputs,
